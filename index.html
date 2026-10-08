@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shorts Studio</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f7;margin:0;color:#171717}
+.wrap{max-width:520px;margin:auto;padding:20px}
+.card{background:white;border-radius:22px;padding:20px;box-shadow:0 4px 20px #00000010;margin-bottom:16px}
+h1{font-size:26px;margin:4px 0 8px}.muted{color:#666;font-size:14px}
+label{display:block;font-weight:700;margin:16px 0 7px}
+textarea,input{width:100%;box-sizing:border-box;border:1px solid #ddd;border-radius:14px;padding:13px;font-size:16px}
+button{width:100%;border:0;border-radius:14px;padding:14px;font-size:16px;font-weight:700;margin-top:14px;background:#111;color:white}
+button.secondary{background:#eee;color:#111}
+.row{display:flex;gap:8px}.row button{flex:1}
+.out{white-space:pre-wrap;line-height:1.8;background:#fafafa;border-radius:14px;padding:14px;margin-top:12px}
+.badge{display:inline-block;background:#eee;border-radius:20px;padding:6px 10px;font-size:12px;margin:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>🎬 Shorts Studio</h1>
+<div class="muted">نسخه آزمایشی موبایلی — فعلاً بدون حساب پولی</div>
+<span class="badge">فارسی</span><span class="badge">زیرنویس انگلیسی</span><span class="badge">9:16</span>
+<label>موضوع ویدیو</label>
+<input id="topic" value="۳ نشانه که نشان می‌دهد یک مرد واقعاً همسرش را دوست دارد">
+<button onclick="makeDraft()">ساخت پیش‌نویس</button>
+</div>
+<div class="card" id="result" style="display:none">
+<h2>پیش‌نویس ویدیو</h2>
+<div id="fa" class="out"></div>
+<h3>🇬🇧 English subtitles</h3>
+<div id="en" class="out"></div>
+<div class="row">
+<button class="secondary" onclick="copyText('fa')">کپی فارسی</button>
+<button class="secondary" onclick="copyText('en')">کپی انگلیسی</button>
+</div>
+<button onclick="alert('در نسخه بعدی: تولید صدا، ساخت ویدیو و ارسال برای تأیید اضافه می‌شود.')">تأیید برای مرحله بعد</button>
+</div>
+</div>
+<script>
+const drafts={
+"۳ نشانه که نشان می‌دهد یک مرد واقعاً همسرش را دوست دارد":{
+fa:`از کجا بفهمیم یک مرد واقعاً همسرش را دوست دارد؟
+
+نشانه اول: احساسات همسرش برایش مهم است. وقتی همسرش ناراحت است، بی‌تفاوت نمی‌ماند.
+
+نشانه دوم: در تصمیم‌های مهم زندگی، نظر همسرش را می‌پرسد و به آن احترام می‌گذارد.
+
+نشانه سوم: محبتش فقط در حرف نیست؛ رفتار روزانه‌اش نشان می‌دهد که برای همسرش ارزش قائل است.
+
+عشق واقعی فقط گفتن «دوستت دارم» نیست؛ رفتاری است که هر روز آن را ثابت می‌کند.`,
+en:`How can you tell if a man truly loves his wife?
+
+Sign number one: He cares about her feelings. When she is upset, he doesn't ignore her.
+
+Sign number two: He asks for his wife's opinion on important decisions and respects it.
+
+Sign number three: His love isn't just words. His daily actions show that he values his wife.
+
+True love isn't just saying “I love you.” It's behavior that proves it every day.`
+}};
+function makeDraft(){
+ let t=document.getElementById('topic').value.trim();
+ let d=drafts[t]||{fa:`موضوع: ${t}\n\nسه نکته مهم درباره این موضوع را بررسی می‌کنیم.\nنکته اول: به رفتارهای واقعی توجه کنید.\nنکته دوم: به تداوم رفتارها توجه کنید.\nنکته سوم: قبل از قضاوت، شرایط را در نظر بگیرید.`,
+ en:`Topic: ${t}\n\nHere are three important points about this topic.\nPoint one: Pay attention to real behavior.\nPoint two: Look for consistency over time.\nPoint three: Consider the circumstances before judging.`};
+ document.getElementById('fa').textContent=d.fa;
+ document.getElementById('en').textContent=d.en;
+ document.getElementById('result').style.display='block';
+}
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).textContent);alert('کپی شد');}
+</script>
+</body>
+</html>
